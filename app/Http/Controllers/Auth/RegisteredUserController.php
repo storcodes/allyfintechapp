@@ -42,27 +42,65 @@ class RegisteredUserController extends Controller
         ]);
 
 
-        $user = User::create($data);
 
-        $user->referral_code = \Str::random(4) . rand(0,100) . $user->id;
 
         if($request->ref != NULL){
-            $user_ref = User::find($request->ref);
-            $user->referral_user_id = $user_ref->id;
+            if($user_ref = User::where('referral_code', $request->ref)->first() == NULL ){
+                return back()->with(['error' => 'wrong referral code']);
+            }
+                $user = User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'password' => Hash::make($request->password),
+                ]);
+
+                $user->referral_code = \Str::random(4) . rand(0 , 100) . $user->id;
+                $user_ref = User::where('referral_code', $request->ref)->first();
+
+                $ref_user_wallet = $user_ref->wallet;
+                $ref_user_wallet->balance += 1000.00;
+                $user->referral_user_id = $user_ref->id;
+                $user->save();
+                $ref_user_wallet->save();
+
+                $user->wallet()->create();
+                $user->account()->create([
+                    'number' => random_int(2182142264, 9999999999),
+                    'name' => $user->name,
+                ]);
+                $user->save();
+
+                event(new Registered($user));
+
+                Auth::login($user);
+
+                return redirect(RouteServiceProvider::HOME);
+            }
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'password' => Hash::make($request->password),
+            ]);
+
+            $user->referral_code = \Str::random(4) . rand(0 , 100) . $user->id;
+            $user->wallet()->create();
+            $user->account()->create([
+                'number' => random_int(2182142264, 9999999999),
+                'name' => $user->name,
+            ]);
             $user->save();
+
+            event(new Registered($user));
+
+            Auth::login($user);
+
+            return redirect(RouteServiceProvider::HOME);
         }
 
-        $user->wallet()->create();
-        $user->account()->create([
-            'number' => random_int(2182142264, 9999999999),
-            'name' => $user->name,
-        ]);
-        $user->save();
 
-        event(new Registered($user));
 
-        Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
-    }
 }

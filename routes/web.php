@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,7 @@ Route::get('/', function () {
 });
 
 
+
 Route::get('/dashboard', function () {
     if(Auth::user()->role == 1){
         return redirect()->route('dashboard');
@@ -33,7 +35,17 @@ Route::get('/dashboard', function () {
 Route::prefix('user')->middleware(['auth'])->group(function(){
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/profile', [HomeController::class, 'profile'])->name('user.profile');
-   
+    Route::post('/edit-details',  [HomeController::class, 'editDetails'])->name('user.edit_details');
+    Route::post('/edit-user-account-details',  [AccountController::class, 'editAccntDetails'])->name('user.edit_account_details');
+    Route::get('/user-transfer', [AccountController::class, 'transfer'])->name('user.transfer');
+    Route::post('/user-to-user-transfer', [AccountController::class, 'transferFunction'])->name('user.transfer_to_alley_users');
+
+
+    Route::get('/user-deposit', [AccountController::class, 'deposit'])->name('user.deposit');
+    Route::post('/pay', [AccountController::class, 'redirectToGateway'])->name('user.deposit_money');
+    Route::get('/payment/callback', [AccountController::class, 'handleGatewayCallback']);
+
+    Route::get('/referrals', [HomeController::class, 'referrals'])->name('user.referrals');
 });
 
 require __DIR__.'/auth.php';

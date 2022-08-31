@@ -22,34 +22,22 @@
 <!-- Start User Area -->
 <div class="user-area ptb-100">
     <div class="container">
-        <form class="user-form">
+        <div class="user-form">
+
             <h3>Login</h3>
 
             <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <a href="https://www.google.com/" target="_blank" class="or-login google">
-                        Google
-                    </a>
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-                    <a href="https://www.facebook.com/" target="_blank" class="or-login facebook">
-                        Facebook
-                    </a>
-                </div>
-
-                <div class="col-12">
-                    <span class="or">Or</span>
-                </div>
+                
+                <form  action="{{route('login')}}" method="POST">@csrf
                 <div class="col-12">
                     @foreach ($errors->all() as $err)
-                        <p class="alert alert-danger p-3">{{ $err }}</p>
+                        <p class="text-danger alert alert-danger p-3">{{ $err }}</p>
                     @endforeach
                 </div>
                 <div class="col-12">
                     <div class="form-group">
                         <label>Email</label>
-                        <input class="form-control" type="text" name="name">
+                        <input class="form-control" type="email" name="email">
                     </div>
                 </div>
 
@@ -79,6 +67,7 @@
                 </div>
             </div>
         </form>
+    </div>
     </div>
 </div>
 <!-- End User Area -->

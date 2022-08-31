@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAccountsTable extends Migration
+class CreateTransfersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('accounts', function (Blueprint $table) {
+        Schema::create('transfers', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('number');
-            $table->string('name');
-            $table->string('pin')->nullable();
-            $table->enum('type', ['savings','current', 'fixed deposit'])->nullable();
+            $table->integer('recepient_id');
+            $table->integer('status_id');
+            $table->double('amount');
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accounts');
+        Schema::dropIfExists('transfers');
     }
 }

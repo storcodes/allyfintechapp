@@ -20,7 +20,8 @@ class CreateTransactionsTable extends Migration
             $table->double('amount')->default(0);
             $table->enum('type', ['credit', 'debit','transfer']);
             $table->integer('status_id');
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
+            $table->string('reference')->nullable();
             $table->timestamps();
         });
     }

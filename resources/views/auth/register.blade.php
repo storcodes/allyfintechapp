@@ -25,24 +25,6 @@
 			<div class="container">
 				<form class="user-form" action="{{route('register')}}" method="POST">@csrf
 					<h3>Register</h3>
-					<div class="row">
-						<div class="col-lg-6 col-sm-6">
-							<a href="https://www.google.com/" target="_blank" class="or-login google">
-								Google
-							</a>
-						</div>
-
-						<div class="col-lg-6 col-sm-6">
-							<a href="https://www.facebook.com/" target="_blank" class="or-login facebook">
-								Facebook
-							</a>
-						</div>
-
-						<div class="col-12">
-							<span class="or">Or</span>
-						</div>
-
-
 						<div class="col-12">
 							<div class="form-group">
                                 <div class="col-12">

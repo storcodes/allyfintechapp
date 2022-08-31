@@ -35,14 +35,14 @@
     </head>
     <body>
         <!-- Start Preloader Area -->
-		<div class="preloader" id="loader-style">
+		{{-- <div class="preloader" id="loader-style">
 			<div class="preloader-wrap">
 				<span></span>
 				<span></span>
 				<span></span>
 				<span></span>
 			</div>
-		</div>
+		</div> --}}
 		<!-- End Preloader Area -->
 
 		<!-- Start Heading Area -->
@@ -55,21 +55,16 @@
 								<li>
 									<span>Call:</span>
 									<a href="tel:+1-541-754-3010">
-										+1-541-754-3010
+										+234 91-342-1234
 									</a>
 								</li>
-								<li>
-									<span>Mail:</span>
-									<a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#b5d6dadbc1d4d6c1f5d7dcc1c79bd6dad8">
-										<span class="__cf_email__" data-cfemail="71121e1f0510120531131805035f121e1c">[email&#160;protected]</span>
-									</a>
-								</li>
+
 							</ul>
 						</div>
 						<div class="col-lg-4 col-md-6">
 							<ul class="header-middle-content">
 								<li>
-									<p>We have special offers every day. <a href="features.html">Find your offer</a></p>
+									<p>We are the best at loan offers . <a href="features.html">Find your offer</a></p>
 								</li>
 							</ul>
 						</div>
@@ -105,7 +100,7 @@
 					<div class="mobile-responsive-menu">
 						<div class="logo">
 							<a href="index.html">
-								<img src="/assets/images/logo.png" alt="logo">
+								<h3>ALLY</h3>
 							</a>
 						</div>
 					</div>
@@ -116,71 +111,25 @@
 				<div class="container-fluid">
 					<nav class="navbar navbar-expand-md navbar-light">
 						<a class="navbar-brand" href="index.html">
-							<img src="/assets/images/logo.png" alt="logo">
+							 <h3>ALLY</h3>
 						</a>
 
 						<div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
 							<ul class="navbar-nav ms-auto">
 								<li class="nav-item">
-									<a href="#" class="nav-link dropdown-toggle active">
+									<a href="#" class="nav-link active">
 										Home
 									</a>
 
-									<ul class="dropdown-menu">
-										<li class="nav-item">
-											<a href="index.html" class="nav-link active">Home One</a>
-										</li>
-										<li class="nav-item">
-											<a href="index-2.html" class="nav-link">Home Two</a>
-										</li>
-										<li class="nav-item">
-											<a href="index-3.html" class="nav-link">Home Three</a>
-										</li>
-									</ul>
+
 								</li>
 
 								<li class="nav-item">
-									<a href="#" class="nav-link dropdown-toggle">
-										Pages
-									</a>
 
-									<ul class="dropdown-menu">
-										<li class="nav-item">
-											<a href="about-us.html" class="nav-link">About Us</a>
-										</li>
+										<a href="about-us.html" class="nav-link">About Us</a>
 
-										<li class="nav-item">
-											<a href="all-country.html" class="nav-link">All Country</a>
-										</li>
 
-										<li class="nav-item">
-											<a href="faq.html" class="nav-link">FAQ</a>
-										</li>
 
-										<li class="nav-item">
-											<a href="{{route('login')}}" class="nav-link">Login</a>
-										</li>
-
-										<li class="nav-item">
-											<a href="{{route('register')}}" class="nav-link">Register</a>
-										</li>
-
-										<li class="nav-item">
-											<a href="privacy-policy.html" class="nav-link">Privacy Policy</a>
-										</li>
-
-										<li class="nav-item">
-											<a href="terms-conditions.html" class="nav-link">Terms And Conditions</a>
-										</li>
-
-										<li class="nav-item">
-											<a href="coming-soon.html" class="nav-link">Coming Soon</a>
-										</li>
-
-										<li class="nav-item">
-											<a href="404.html" class="nav-link">404 Page</a>
-										</li>
-									</ul>
 								</li>
 
 								<li class="nav-item">
@@ -188,33 +137,18 @@
 								</li>
 
 								<li class="nav-item">
-									<a href="#" class="nav-link dropdown-toggle">
+									<a href="#" class="nav-link ">
 										Features
 									</a>
 
-									<ul class="dropdown-menu">
-										<li class="nav-item">
-											<a href="features.html" class="nav-link">Features</a>
-										</li>
-										<li class="nav-item">
-											<a href="feature-details.html" class="nav-link">Feature Details</a>
-										</li>
-									</ul>
+
 								</li>
 
 								<li class="nav-item">
-									<a href="#" class="nav-link dropdown-toggle">
-										Blog
+									<a href="#" class="nav-link ">
+										Loan
 									</a>
 
-									<ul class="dropdown-menu">
-										<li class="nav-item">
-											<a href="blog.html" class="nav-link">Blog</a>
-										</li>
-										<li class="nav-item">
-											<a href="blog-details.html" class="nav-link">Blog Details</a>
-										</li>
-									</ul>
 								</li>
 
 								<li class="nav-item">

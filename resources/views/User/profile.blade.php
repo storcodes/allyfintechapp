@@ -35,8 +35,16 @@
                                     <div class="d-flex align-items-start mt-3 mt-sm-0">
                                         <div class="flex-shrink-0">
                                             <div class="avatar-xl me-3">
+                                                @if (Auth::user()->image == NULL)
                                                 <img src="/admin_assets/images/users/avatar-2.jpg" alt=""
-                                                    class="img-fluid rounded-circle d-block">
+                                                class="img-fluid rounded-circle d-block">
+                                                @else
+
+                                                <img src="/public/user_image/{{Auth::user()->image}}" alt="img"
+                                                class="img-fluid rounded-circle d-block">
+                                                @endif
+
+
                                             </div>
                                         </div>
                                         <div class="flex-grow-1">
@@ -132,21 +140,20 @@
                                     <!-- ============================================================== -->
                                     <div class="row">
                                         <div class="col-lg-12">
-                                           
-                                               
-                                                
-                                                    <div id="basic-pills-wizard" class="twitter-bs-wizard">
-                                                        <ul class="twitter-bs-wizard-nav">
-                                                            <li class="nav-item">
-                                                                <a href="#seller-details" class="nav-link"
-                                                                    data-toggle="tab">
-                                                                    <div class="step-icon" data-bs-toggle="tooltip"
-                                                                        data-bs-placement="top" title="Seller Details">
-                                                                        <i class="bx bx-list-ul"></i>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li class="nav-item">
+
+
+
+                                            <div id="basic-pills-wizard" class="twitter-bs-wizard">
+                                                <ul class="twitter-bs-wizard-nav">
+                                                    <li class="nav-item">
+                                                        <a href="#seller-details" class="nav-link" data-toggle="tab">
+                                                            <div class="step-icon" data-bs-toggle="tooltip"
+                                                                data-bs-placement="top" title="Seller Details">
+                                                                <i class="bx bx-list-ul"></i>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    {{-- <li class="nav-item">
                                                                 <a href="#company-document" class="nav-link"
                                                                     data-toggle="tab">
                                                                     <div class="step-icon" data-bs-toggle="tooltip"
@@ -155,90 +162,74 @@
                                                                         <i class="bx bx-book-bookmark"></i>
                                                                     </div>
                                                                 </a>
-                                                            </li>
+                                                            </li> --}}
 
-                                                            <li class="nav-item">
-                                                                <a href="#bank-detail" class="nav-link"
-                                                                    data-toggle="tab">
-                                                                    <div class="step-icon" data-bs-toggle="tooltip"
-                                                                        data-bs-placement="top" title="Bank Details">
-                                                                        <i class="bx bxs-bank"></i>
+                                                    <li class="nav-item">
+                                                        <a href="#bank-detail" class="nav-link" data-toggle="tab">
+                                                            <div class="step-icon" data-bs-toggle="tooltip"
+                                                                data-bs-placement="top" title="Bank Details">
+                                                                <i class="bx bxs-bank"></i>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <!-- wizard-nav -->
+
+                                                <div class="tab-content twitter-bs-wizard-tab-content">
+                                                    <div class="tab-pane" id="seller-details">
+                                                        <div class="text-center mb-4">
+                                                            <h5>Edit Your Details</h5>
+                                                            <p class="card-title-desc">Fill all information below</p>
+                                                        </div>
+                                                        <form action = "{{route('user.edit_details')}}" method="POST"> @csrf
+
+                                                                @foreach ($errors->all() as $err)
+                                                                <p class="text-secondary alert alert-danger"> {{$err}}  </p>
+                                                                @endforeach
+
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+
+                                                                    <div class="mb-3">
+
+                                                                        <label for="basicpill-firstname-input"
+                                                                            class="form-label">
+                                                                            Username</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="basicpill-firstname-input"  disabled
+                                                                            value="{{Auth::user()->name}}" name="name">
                                                                     </div>
-                                                                </a>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="basicpill-lastname-input"
+                                                                            class="form-label">Phone</label>
+                                                                        <input type="tel" class="form-control" id="basicpill-lastname-input" value="{{Auth::user()->phone}}" name="phone">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="basicpill-lastname-input"
+                                                                            class="form-label">Image</label>
+                                                                        <input type="file" class="form-control"
+                                                                            id="basicpill-lastname-input" name="image">
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="d-grid col-6 mx-auto ">
+                                                                <button class="btn btn-success text-center" type="submit">Save Changes</button>
+                                                            </div>
+
+                                                        </form>
+                                                        <ul class="pager wizard twitter-bs-wizard-pager-link">
+                                                            <li class="next"><a href="javascript: void(0);"
+                                                                    class="btn btn-primary" onclick="nextTab()">Create Pin <i
+                                                                        class="bx bx-chevron-right ms-1"></i></a>
                                                             </li>
                                                         </ul>
-                                                        <!-- wizard-nav -->
-
-                                                        <div class="tab-content twitter-bs-wizard-tab-content">
-                                                            <div class="tab-pane" id="seller-details">
-                                                                <div class="text-center mb-4">
-                                                                    <h5>Edit Your Details</h5>
-                                                                    <p class="card-title-desc">Fill all information below</p>
-                                                                </div>
-                                                                <form>
-                                                                    <div class="row">
-                                                                        <div class="col-lg-6">
-                                                                            <div class="mb-3">
-                                                                                <label for="basicpill-firstname-input"
-                                                                                    class="form-label">
-                                                                                    Username</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    id="basicpill-firstname-input"
-                                                                                   value="{{Auth::user()->name}}" name="name">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <div class="mb-3">
-                                                                                <label for="basicpill-lastname-input"
-                                                                                    class="form-label">Phone</label>
-                                                                                <input type="tel" class="form-control"
-                                                                                    id="basicpill-lastname-input"
-                                                                                    value="{{Auth::user()->phone}}" name="phone" >
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="row">
-                                                                        <div class="col-lg-6">
-                                                                            <div class="mb-3">
-                                                                                <label for="basicpill-phoneno-input"
-                                                                                    class="form-label">Phone</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    id="basicpill-phoneno-input"
-                                                                                    placeholder="Enter your Phone No.">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <div class="mb-3">
-                                                                                <label for="basicpill-email-input"
-                                                                                    class="form-label">Email</label>
-                                                                                <input type="email" class="form-control"
-                                                                                    id="basicpill-email-input"
-                                                                                    placeholder="Enter your email">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-lg-12">
-                                                                            <div class="mb-3">
-                                                                                <label for="basicpill-address-input"
-                                                                                    class="form-label">Address</label>
-                                                                                <textarea id="basicpill-address-input"
-                                                                                    class="form-control" rows="2"
-                                                                                    placeholder="Enter your Address"></textarea>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                                <ul class="pager wizard twitter-bs-wizard-pager-link">
-                                                                    <li class="next"><a href="javascript: void(0);"
-                                                                            class="btn btn-primary"
-                                                                            onclick="nextTab()">Next <i
-                                                                                class="bx bx-chevron-right ms-1"></i></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <!-- tab pane -->
+                                                    </div>
+                                                    {{-- <!-- tab pane -->
                                                             <div class="tab-pane" id="company-document">
                                                                 <div>
                                                                     <div class="text-center mb-4">
@@ -341,112 +332,101 @@
                                                                     </ul>
                                                                 </div>
                                                             </div>
-                                                            <!-- tab pane -->
-                                                            <div class="tab-pane" id="bank-detail">
-                                                                <div>
-                                                                    <div class="text-center mb-4">
-                                                                        <h5>Bank Details</h5>
-                                                                        <p class="card-title-desc">Fill all information
-                                                                            below</p>
-                                                                    </div>
-                                                                    <form>
-                                                                        <div class="row">
-                                                                            <div class="col-lg-6">
-                                                                                <div class="mb-3">
-                                                                                    <label
-                                                                                        for="basicpill-namecard-input"
-                                                                                        class="form-label">Name on
-                                                                                        Card</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        id="basicpill-namecard-input"
-                                                                                        placeholder="Enter your Name on Card">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-lg-6">
-                                                                                <div class="mb-3">
-                                                                                    <label class="form-label">Credit
-                                                                                        Card Type</label>
-                                                                                    <select class="form-select">
-                                                                                        <option selected>Select Card
-                                                                                            Type</option>
-                                                                                        <option value="AE">American
-                                                                                            Express</option>
-                                                                                        <option value="VI">Visa</option>
-                                                                                        <option value="MC">MasterCard
-                                                                                        </option>
-                                                                                        <option value="DI">Discover
-                                                                                        </option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-lg-6">
-                                                                                <div class="mb-3">
-                                                                                    <label for="basicpill-cardno-input"
-                                                                                        class="form-label">Credit Card
-                                                                                        Number</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        id="basicpill-cardno-input"
-                                                                                        placeholder="Enter your Credit Card Number">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-lg-6">
-                                                                                <div class="mb-3">
-                                                                                    <label
-                                                                                        for="basicpill-card-verification-input"
-                                                                                        class="form-label">Card
-                                                                                        Verification Number</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        id="basicpill-card-verification-input"
-                                                                                        placeholder="Enter your Card Verification Number">
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-lg-6">
-                                                                                <div class="mb-3">
-                                                                                    <label
-                                                                                        for="basicpill-expiration-input"
-                                                                                        class="form-label">Expiration
-                                                                                        Date</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        id="basicpill-expiration-input"
-                                                                                        placeholder="Enter your Expiration Date">
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
-                                                                    <ul
-                                                                        class="pager wizard twitter-bs-wizard-pager-link">
-                                                                        <li class="previous"><a
-                                                                                href="javascript: void(0);"
-                                                                                class="btn btn-primary"
-                                                                                onclick="nextTab()"><i
-                                                                                    class="bx bx-chevron-left me-1"></i>
-                                                                                Previous</a></li>
-                                                                        <li class="float-end"><a
-                                                                                href="javascript: void(0);"
-                                                                                class="btn btn-primary"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target=".confirmModal">Save
-                                                                                Changes</a></li>
-                                                                    </ul>
-                                                                </div>
+                                                    <!-- tab pane --> --}}
+                                                    <div class="tab-pane" id="bank-detail">
+                                                        <div>
+                                                            <div class="text-center mb-4">
+                                                                <h5>Bank Details</h5>
+                                                                <p class="card-title-desc"> fill in other info apart
+                                                                    from your your bank account and name</p>
                                                             </div>
-                                                            <!-- tab pane -->
+                                                            <form action="{{route('user.edit_account_details')}}" method="POST"> @csrf
+                                                                @foreach ($errors->all() as $err)
+                                                                <p class="text-secondary alert alert-danger"> {{$err}}  </p>
+                                                                @endforeach
+                                                                <div class="row">
+                                                                    <div class="col-lg-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="basicpill-namecard-input"
+                                                                                class="form-label">Account Name</label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="basicpill-namecard-input"
+                                                                                value="{{Auth::user()->account->name}}" >
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-lg-6">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Account
+                                                                                Type</label>
+                                                                            <select class="form-select" name="type">
+                                                                                <option selected value="savings">Savings</option>
+                                                                                <option value="fixed deposit">fixed Deposit</option>
+                                                                                <option value="current">Current</option>
+
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="basicpill-cardno-input"
+                                                                                class="form-label">Account
+                                                                                Number</label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="basicpill-cardno-input" disabled
+                                                                                value="{{Auth::user()->account->number}}">
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="basicpill-cardno-input"
+                                                                                class="form-label">Create Pin (four numbers)
+                                                                                </label>
+                                                                            <input type="password" class="form-control"
+                                                                                id="basicpill-cardno-input" placeholder="create your pin"
+                                                                                name="pin">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-lg-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="basicpill-cardno-input"
+                                                                                class="form-label">Confirm your pin</label>
+                                                                            <input type="password" class="form-control"
+                                                                                id="basicpill-cardno-input" placeholder="confirm your pin"
+                                                                                name="pin_confirmation">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="d-grid col-6 mx-auto ">
+                                                                    <button class="btn btn-success text-center" type="submit">Save Changes</button>
+                                                                </div>
+
+
+                                                            <ul class="pager wizard twitter-bs-wizard-pager-link">
+                                                                <li class="previous"><a href="javascript: void(0);"
+                                                                        class="btn btn-primary" onclick="nextTab()"><i
+                                                                            class="bx bx-chevron-left me-1"></i>
+                                                                        Previous</a></li>
+
+                                                            </ul>
+                                                        </form>
                                                         </div>
-                                                        <!-- end tab content -->
                                                     </div>
-                                               
-                                                <!-- end card body -->
-                                            
+                                                    <!-- tab pane -->
+                                                </div>
+                                                <!-- end tab content -->
+                                            </div>
+
+                                            <!-- end card body -->
+
                                             <!-- end card -->
                                         </div>
                                         <!-- end col -->
